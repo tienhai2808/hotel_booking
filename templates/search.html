@@ -1,0 +1,67 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock %}
+
+{% block title %}
+  {% if q %}
+  Kết quả tìm kiếm '{{ q }}'
+  {% else %}
+  Tìm kiếm
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+{% if q %}
+<h1 class="text-center">Kết quả tìm kiếm '{{ q }}'</h1>
+
+{% if hotels %}
+  <h3 class="text-center">Khách sạn liên quan</h3>
+  <div class="container">
+    <div class="row justify-content-between">
+      {% for hotel in hotels %}
+      <a href="/hotel/{{ hotel.slug }}/" class="col-5 a-none d-flex bg-hotel justify-content-start border px-2 py-1 gap-5 mb-4" style="align-items: center;">
+        <div class="hotel-img">
+          <img src="{{ hotel.hinh_anh1.url }}" alt="Ảnh khách sạn">
+        </div>
+        <div class="hotel-name">{{ hotel.ten }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{% if rooms %}
+  <h3 class="text-center">Phòng liên quan</h3>
+  <div class="container">
+    <div class="row justify-content-between">
+      {% for room in rooms %}
+      <a href="/hotel/{{ room.khach_san.slug }}/{{ room.slug }}/" class="col-5 bg-hotel a-none d-flex justify-content-start border px-2 py-1 gap-5 mb-4" style="align-items: center;">
+        <div class="room-img">
+          <img src="{{ room.hinh_anh1.url }}" alt="Ảnh phòng">
+        </div>
+        <div class="room-name">{{ room.ten }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{% if not rooms and not hotels %}
+<h4 class="text-center">Không tìm thấy kết quả nào</h4>
+{% endif %}
+
+{% else %}
+<h1 class="text-center">Tìm kiếm những gì bạn muốn</h1>
+<br>
+<div class="d-flex justify-content-center">
+  <form class="d-flex justify-content-center gap-3" style="width: 60%;">
+    <input type="search" class="form-control" placeholder="Nhập từ khóa" name="q">
+    <button class="btn btn-primary">Tìm</button>
+  </form>
+</div>
+{% endif %}
+{% endblock %}
+

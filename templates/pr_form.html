@@ -1,0 +1,25 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}
+  Quên mật khẩu
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Nhập Email của bạn</h1>
+<div class="d-flex justify-content-center pb-5">
+  <div style="width: 50%;" class="border border-2 bg-hotel rounded d-flex justify-content-center py-4">
+    <form style="width: 90%;" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <center>
+        <button class="btn bg-button">Xác nhận</button>
+      </center>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/pr_form.js' %}"></script>
+{% endblock %}

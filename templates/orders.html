@@ -1,0 +1,72 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  Quản lý đặt phòng
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Quản lý đặt phòng</h1>
+<div class="d-flex justify-content-center mb-3">
+  <div style="width: 80%; align-items: center;" class="d-flex justify-content-end">
+    <div class="me-2"><strong>Trạng thái</strong></div>
+    <form class="form-status">
+      <select name="status" id="select-status" class="form-select">
+        <option {% if status == 'Tất cả' or not status %} selected {% endif %}>Tất cả</option>
+        <option {% if status == 'Chờ xác nhận' %} selected {% endif %}>Chờ xác nhận</option>
+        <option {% if status == 'Đã hủy' %} selected {% endif %}>Đã hủy</option>
+        <option {% if status == 'Đã xác nhận' %} selected {% endif %}>Đã xác nhận</option>
+        <option {% if status == 'Đã hoàn thành' %} selected {% endif %}>Đã hoàn thành</option>
+      </select>
+    </form>
+  </div>
+</div>
+<div class="d-flex justify-content-center pb-2">
+  <table class="table table-bordered border-primary" style="width: 80%;">
+    <thead>
+      <tr>
+        <th scope="col">Thời gian</th>
+        <th scope="col">Phòng</th>
+        <th scope="col">Ngày nhận</th>
+        <th scope="col">Ngày trả</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Chi tiết</th>
+        <th scope="col">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order.thoi_gian|date:"H:i, d/m/y" }}</td>
+        <td>
+          <a href="/hotel/{{ order.phong.khach_san.slug }}/{{ order.phong.slug }}/" title="{{ order.phong.ten }}" class="a-none">{{ order.phong.ten|truncatechars:30 }}</a>
+        </td>
+        <td>{{ order.ngay_nhan|date:'d/m/y' }}</td>
+        <td>{{ order.ngay_tra|date:'d/m/y' }}</td>
+        <td>{{ order.trang_thai }}</td>
+        <td>
+          <a href="/my/hotel/orders/{{ order.id }}/" class="a-none">Xem chi tiết</a>
+        </td>
+        <td>
+          {% if order.trang_thai == 'Chờ xác nhận' %}
+          <span id="{{ order.id }}" class="btn-confirm badge text-bg-primary" style="cursor: pointer;">Xác nhận</span>
+          {% endif %}
+          {% if order.trang_thai == 'Đã xác nhận' %}
+          <span id="{{ order.id }}" class="btn-complete badge text-bg-primary" style="cursor: pointer;">Hoàn thành</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<form form-action method="post">
+  {% csrf_token %}
+  <input hidden type="text" class="action-hidden" name="action">
+  <input hidden type="text" class="id-hidden" name="order_id">
+</form>
+{% endblock %}
+
+{% block js %}
+{% load static %}
+<script src="{% static 'js/orders.js' %}"></script>
+{% endblock %}

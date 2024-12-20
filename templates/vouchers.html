@@ -1,0 +1,59 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  Quản lý khuyến mãi
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Quản lý khuyến mãi</h1>
+<div class="d-flex justify-content-center pb-2">
+  <table class="table table-bordered border-primary" style="width: 80%;">
+    <thead>
+      <tr>
+        <th scope="col">Kiểu khuyến mãi</th>
+        <th scope="col">Khuyến mãi</th>
+        <th scope="col">Ngày bắt đầu</th>
+        <th scope="col">Ngày kết thúc</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Chi tiết</th>
+        <th scope="col">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for voucher in vouchers %}
+      <tr>
+        <td>{{ voucher.kieu }}</td>
+        <td>
+          {% if voucher.kieu == 'Phần trăm' %}
+          {{ voucher.giam_gia|floatformat:0 }}%
+          {% else %}
+          {{ voucher.giam_gia|floatformat:0 }} VND
+          {% endif %}
+        </td>
+        <td>{{ voucher.ngay_bat_dau|date:'d/m/Y' }}</td>
+        <td>{{ voucher.ngay_ket_thuc|date:'d/m/Y' }}</td>
+        <td>{{ voucher.trang_thai }}</td>
+        <td>
+          <a href="{{ voucher.id }}/" class="a-none">Xem chi tiết</a>
+        </td>
+        <td>
+          <span id="{{ voucher.id }}" class="btn-delete badge text-bg-danger" style="cursor: pointer;">Xóa</span>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<form form-delete method="post">
+  {% csrf_token %}
+  <input hidden type="text" name="id_delete">
+</form>
+<center>
+  <a href="/my/hotel/create-voucher/" class="btn bg-button">Tạo khuyến mãi mới</a>
+</center>
+{% endblock %}
+
+{% block js %}
+{% load static %}
+<script src="{% static 'js/vouchers.js' %}"></script>
+{% endblock %}

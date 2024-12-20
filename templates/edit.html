@@ -1,0 +1,22 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  Chỉnh sửa hồ sơ
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Chỉnh sửa hồ sơ</h1>
+<div class="d-flex justify-content-center pb-5">
+  <div style="width: 50%;" class="border border-2 bg-hotel rounded d-flex justify-content-center py-4">
+    <form style="width: 90%;" method="post">
+      {% csrf_token %}
+      {{ u_form.as_p }}
+      {{ p_form.as_p }}
+      <div class="text-center mb-3">Đổi mật khẩu <a href="change-password/">tại đây</a></div>
+      <center>
+        <button class="btn bg-button">Cập nhật</button>
+      </center>
+    </form>
+  </div>
+</div>
+{% endblock %}

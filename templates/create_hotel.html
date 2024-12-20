@@ -1,0 +1,20 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  Tạo khách sạn
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Tạo khách sạn</h1>
+<div class="d-flex justify-content-center pb-5">
+  <div style="width: 50%;" class="border border-2 rounded d-flex justify-content-center py-4">
+    <form style="width: 90%;" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <center>
+        <button class="btn btn-primary">Xác nhận tạo</button>
+      </center>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+.room-img, .hotel-img {
+  max-width: 200px;
+  height: 100px;
+  overflow: hidden;
+  aspect-ratio: 220/14;
+}
+
+.room-img img, .hotel-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.room-name, .hotel-name {
+  font-size: 17px;
+  color: #000;
+}

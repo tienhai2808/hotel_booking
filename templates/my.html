@@ -1,0 +1,70 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  Nhà của bạn
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Nhà của bạn</h1>
+<div class="justify-content-center d-flex">
+  <div style="width: 80%;" class="border bg-hotel border-2 rounded px-3 py-2">
+    <h4 class="text-center">Thông tin cá nhân</h4>
+    <div>Họ Tên</div>
+    <h6 class="text-center">{{ request.user.first_name }} {{ request.user.last_name }}</h6>
+    <div>Email</div>
+    <h6 class="text-center">{{ request.user.email }}</h6>
+    <div>Số điện thoại</div>
+    <h6 class="text-center">
+    {% if request.user.hoso.dien_thoai %}
+      {{ request.user.hoso.dien_thoai }}
+    {% else %}
+      Chưa cập nhật
+    {% endif %}
+    </h6>
+    <div>Giới tính</div>
+    <h6 class="text-center">
+    {% if request.user.hoso.gioi_tinh %}
+      {{ request.user.hoso.gioi_tinh }}
+    {% else %}
+      Chưa cập nhật
+    {% endif %}
+    </h6>
+    <div>Ngày sinh</div>
+    <h6 class="text-center">
+    {% if request.user.hoso.ngay_sinh %}
+      {{ request.user.hoso.ngay_sinh|date:"d/m/yy" }}
+    {% else %}
+      Chưa cập nhật
+    {% endif %}
+    </h6>
+    <div>Căn cước công dân/Chứng minh thư</div>
+    <h6 class="text-center">
+    {% if request.user.hoso.cccd %}
+      {{ request.user.hoso.cccd }}
+    {% else %}
+      Chưa cập nhật
+    {% endif %}
+    </h6>
+    <div>Đại chỉ</div>
+    <h6 class="text-center">
+    {% if request.user.hoso.dia_chi %}
+      {{ request.user.hoso.dia_chi }}
+    {% else %}
+      Chưa cập nhật
+    {% endif %}
+    </h6>
+    <br>
+    <center>
+      <a class="btn bg-button mb-2" href="/my/edit/">Cập nhật thông tin</a>
+    </center>
+  </div>
+</div>
+<br>
+<div class="d-flex justify-content-center mb-4 gap-5">
+  {% if request.user.hoso.vai_tro == 'Khách thuê' %}
+  <a href="/my/orders/" class="btn bg-button">Phòng đã đặt</a>
+  <a href="/my/enjoys/" class="btn bg-button">Danh sách yêu thích</a>
+  {% endif %}
+  <a href="/logout/" class="btn bg-button">Đăng xuất</a>
+</div>
+{% endblock %}

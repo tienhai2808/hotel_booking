@@ -1,0 +1,86 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  Chi tiết đặt phòng
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Chi tiết đặt phòng</h1>
+<div class="d-flex justify-content-center pb-2">
+  <div style="width: 80%;">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th scope="row">Thời gian</th>
+          <td>{{ order.thoi_gian|date:"H:i, d/m/Y" }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Phòng</th>
+          <td>{{ order.phong }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Khách hàng</th>
+          <td>{{ order.khach_hang.first_name }} {{ order.khach_hang.last_name }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Ngày nhận</th>
+          <td>{{ order.ngay_nhan|date:"d/m/Y" }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Ngày trả</th>
+          <td>{{ order.ngay_tra|date:"d/m/Y" }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Số khách</th>
+          <td>{{ order.so_khach }} người</td>
+        </tr>
+        <tr>
+          <th scope="row">Phương thức thanh toán</th>
+          <td>{{ order.phuong_thuc }}</td>
+        </tr>
+        {% if order.so_tai_khoan %}
+        <tr>
+          <th scope="row">Số tài khoản</th>
+          <td>{{ order.so_tai_khoan }}</td>
+        </tr>
+        {% endif %}
+        {% if order.ngan_hang %}
+        <tr>
+          <th scope="row">Ngân hàng</th>
+          <td>{{ order.ngan_hang }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+          <th scope="row">Tổng thanh toán</th>
+          <td>{{ order.tong_tien }} VND</td>
+        </tr>
+        <tr>
+          <th scope="row">Trạng thái</th>
+          <td>{{ order.trang_thai }}</td>
+        </tr>
+      </tbody>
+    </table>
+    {% if order.trang_thai == 'Chờ xác nhận' or order.trang_thai == 'Đã xác nhận' %}
+    <center>
+      <form method="POST" form-action>
+        {% csrf_token %}
+        <input hidden type="text" name="action" value="{% if order.trang_thai == 'Chờ xác nhận' %}confirm{% endif %}{% if order.trang_thai == 'Đã xác nhận' %}complete{% endif %}">
+        <button class="btn bg-button btn-action" type="button">
+          {% if order.trang_thai == 'Chờ xác nhận' %}
+          Xác nhận
+          {% endif %}
+          {% if order.trang_thai == 'Đã xác nhận' %}
+          Hoàn thành
+          {% endif %}
+        </button>
+      </form>
+    </center>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+{% load static %}
+<script src="{% static 'js/order_detail.js' %}"></script>
+{% endblock %}

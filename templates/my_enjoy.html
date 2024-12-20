@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}
+  Danh sách yêu thích
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/my_enjoy.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Danh sách yêu thích</h1>
+{% if not enjoys %}
+<h4 class="text-center">Chưa yêu thích phòng nào</h4>
+{% else %}
+<div class="container">
+  <div class="row justify-content-around">
+    {% for enjoy in enjoys %}
+    <a href="/hotel/{{ enjoy.phong.khach_san.slug }}/{{ enjoy.phong.slug }}/" class="col-5 bg-hotel a-none d-flex justify-content-start border px-2 py-1 gap-5 mb-4" style="align-items: center;">
+      <div class="room-img">
+        <img src="{{ enjoy.phong.hinh_anh1.url }}" alt="Ảnh phòng">
+      </div>
+      <div class="room-name">{{ enjoy.phong.ten }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

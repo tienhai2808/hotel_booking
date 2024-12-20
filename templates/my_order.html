@@ -1,0 +1,60 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  Lịch sử đặt phòng
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Các phòng đã đặt</h1>
+{% if orders %}
+<div class="d-flex justify-content-center pb-2">
+  <table class="table table-bordered border-primary bg-hotel" style="width: 80%;">
+    <thead>
+      <tr>
+        <th scope="col">Thời gian</th>
+        <th scope="col">Tên phòng</th>
+        <th scope="col">Ngày nhận</th>
+        <th scope="col">Ngày trả</th>
+        <th scope="col">Số khách</th>
+        <th scope="col">Thanh toán</th>
+        <th scope="col">Tổng tiền</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order.thoi_gian|date:"H:i, d/m/y" }}</td>
+        <td>
+          <a href="/hotel/{{ order.phong.khach_san.slug }}/{{ order.phong.slug }}/" title="{{ order.phong.ten }}" class="a-none">{{ order.phong.ten|truncatechars:25 }}</a>
+        </td>
+        <td>{{ order.ngay_nhan|date:"d/m/y" }}</td>
+        <td>{{ order.ngay_tra|date:"d/m/y" }}</td>
+        <td>{{ order.so_khach }}</td>
+        <td>{{ order.phuong_thuc }}</td>
+        <td>{{ order.tong_tien }}</td>
+        <td class="status">{{ order.trang_thai }}</td>
+        <td>
+          {% if order.trang_thai == 'Chờ xác nhận' %}
+          <span id="{{ order.id }}" class="btn-cancel badge text-bg-danger" method="{{ order.phuong_thuc }}" style="cursor: pointer;">Hủy phòng</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<form form-cancel method="post">
+  {% csrf_token %}
+  <input hidden type="text" name="order_id">
+</form>
+{% else %}
+<h5 class="text-center">Bạn chưa đặt phòng nào</h5>
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% load static %}
+<script src="{% static 'js/my_order.js' %}"></script>
+{% endblock %}

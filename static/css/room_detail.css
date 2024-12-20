@@ -1,0 +1,39 @@
+.div-form {
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(108,117,125, 0.9);
+  padding: 20px 50px;
+  z-index: 99;
+}
+
+.div-close {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+  font-size: 20px;
+  margin-bottom: 17px;
+}
+
+.order-form {
+  padding: 20px 50px 20px 50px;
+}
+
+.order-form label {
+  color: white;
+}
+
+.carousel-control-prev, .carousel-control-next {
+  z-index: 2;
+}
+
+#id_yeu_cau {
+  height: 15vh !important;
+}
+
+.tong-tien strong {
+  color: white;
+  font-size: 22px;
+}

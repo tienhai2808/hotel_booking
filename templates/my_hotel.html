@@ -1,0 +1,82 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  Khách sạn của bạn
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Khách sạn của bạn</h1>
+{% if cokhachsan %}
+<div class="justify-content-center d-flex">
+  <div style="width: 80%;" class="border border-2 rounded px-3 py-2 bg-hotel">
+    <h4 class="text-center">Thông tin khách sạn</h4>
+    <div>Tên</div>
+    <h6 class="text-center">{{ hotel.ten }}</h6>
+    <div>Địa chỉ</div>
+    <h6 class="text-center">{{ hotel.dia_chi }}</h6>
+    <div>Số điện thoại</div>
+    <h6 class="text-center">{{ hotel.dien_thoai }}</h6>
+    <div>Website</div>
+    <h6 class="text-center">{{ hotel.website }}</h6>
+    <div>Email</div>
+    <h6 class="text-center">{{ hotel.email }}</h6>
+    <div>Trạng thái</div>
+    <h6 class="text-center">{{ hotel.trang_thai }}</h6>
+    <div>Ngày tạo trên hệ thống</div>
+    <h6 class="text-center">{{ hotel.ngay_tao|date:"d/m/yy" }}</h6>
+    {% if hotel.trang_thai == 'False' %}
+    Lồnnnn
+    {% endif %}
+    <br>
+    <center>
+      <a class="btn bg-button mb-2" href="/my/edit/hotel/">Cập nhật thông tin</a>
+    </center>
+  </div>
+</div>
+{% else %}
+<center>
+  <h5 class="mb-3">Bạn chưa có khách sạn</h5>
+  <a class="btn btn-primary" href="/my/create-hotel/">Đăng ký khách sạn</a>
+</center>
+{% endif %}
+
+{% endblock %}
+
+
+
+
+
+
+<!-- {% if request.user.hoso.vai_tro == 'Khách sạn' %}
+<div class="col-6 d-flex justify-content-end">
+  <div style="width: 95%;" class="border border-2 rounded px-3 py-2">
+    <h4 class="text-center">Thông tin khách sạn</h4>
+    {% if cokhachsan %}
+    <div>Tên khách sạn</div>
+    <h6 class="text-center">{{ request.user.khachsan.ten }}</h6>
+    <div>Địa chỉ Email:</div>
+    <h6 class="text-center">{{ request.user.khachsan.email }}</h6>
+    <div>Số điện thoại:</div>
+    <h6 class="text-center">{{ request.user.khachsan.dien_thoai }}</h6>
+    <div>Website:</div>
+    <h6 class="text-center"><a href="{{ request.user.khachsan.website }}">{{ request.user.khachsan.website }}</a></h6>
+    <div>Địa chỉ:</div>
+    <h6 class="text-center">{{ request.user.khachsan.dia_chi }}</h6>
+    <div>Ngày tạo:</div>
+    <h6 class="text-center">{{ request.user.khachsan.ngay_tao|date:"d/m/yy" }}</h6>
+    <div>Trạng thái:</div>
+    <h6 class="text-center">{{ request.user.khachsan.trang_thai }}</h6>
+    {% else %}
+    <h6 class="text-center">Bạn có thể đăng ký khách sạn của mình ngay bên dưới</h6>
+    {% endif %}
+    <br>
+    <center>
+      {% if cokhachsan %}
+      <a class="btn btn-primary" href="/hotel/{{ request.user.khachsan.slug }}/">Xem chi tiết</a>
+      {% else %}
+      <a class="btn btn-primary" href="/my/create-hotel/">Đăng ký khách sạn</a>
+      {% endif %}
+    </center>
+  </div>
+</div>
+{% endif %} -->

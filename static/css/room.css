@@ -1,0 +1,9 @@
+.new-tiennghi {
+  position: relative;
+  margin-bottom: 10px;
+}
+.div-close {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}

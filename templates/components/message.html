@@ -1,0 +1,14 @@
+{% for mess in messages %}
+<div class="alert alert-info position-absolute top-3 end-0" role="alert">
+  <span class="mx-2">{{ mess }}</span><i style="cursor: pointer;" class="fa-regular fa-circle-xmark x-close"></i>
+</div>
+{% endfor %}
+
+<script>
+  const alertDiv = document.querySelectorAll('.alert')
+  alertDiv.forEach((alert) => {
+    alert.querySelector('.x-close').addEventListener('click', () => {
+      alert.remove()
+    })
+  })
+</script>

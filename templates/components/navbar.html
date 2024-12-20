@@ -1,0 +1,43 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg bg-main px-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="{% static 'images/logo.png' %}" class="logo" alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if request.user.hoso.vai_tro == 'Khách sạn' %}
+        <li class="nav-item">
+          <a class="nav-link active text-light" aria-current="page" href="/my/hotel/">Khách sạn</a>
+        </li>
+        {% endif %}
+        {% if cokhachsan %}
+        <li class="nav-item">
+          <a class="nav-link active text-light" aria-current="page" href="/my/hotel/rooms/">Quản lý phòng</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-light" aria-current="page" href="/my/hotel/orders">Quản lý đặt phòng</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-light" aria-current="page" href="/my/hotel/vouchers/">Quản lý khuyến mãi</a>
+        </li>
+        {% endif %}
+      </ul>
+      <div class="d-flex gap-3">
+        <form method="get" class="form-search" action="/search/">
+          <input class="search bg-main type="text" name="q" value="{{ q }}">
+          <button class="bg-main">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+        <a href="{% if request.user %}/my/{% else %}/login/{% endif %}" class="a-header">
+          <i class="fa-solid fa-user"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

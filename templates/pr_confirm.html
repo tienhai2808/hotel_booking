@@ -1,0 +1,31 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}
+ Lấy lại mật khẩu
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Lấy lại mật khẩu</h1>
+<div class="d-flex justify-content-center pb-5">
+  <div style="width: 50%;" class="border bg-hotel border-2 rounded d-flex justify-content-center py-4">
+    {% if validlink %}
+    <form style="width: 90%;" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <center>
+        <button class="btn bg-button">Xác nhận</button>
+      </center>
+    </form>
+    {% else %}
+    <p>
+      Bạn không có yêu cầu đổi lấy lại mật khẩu, vui lòng gửi yêu cầu
+    </p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/pr_confirm.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}
+  Đăng ký
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Đăng ký</h1>
+<div class="d-flex justify-content-center pb-5">
+  <div style="width: 50%;" class="border border-2 bg-hotel rounded d-flex justify-content-center py-4">
+    <form style="width: 90%;" method="post">
+      {% csrf_token %}
+      <p>
+        {{ form.username.label_tag }}
+        {{ form.username }}
+      </p>
+      <p>
+        {{ form.email.label_tag }}
+        {{ form.email }}
+      </p>
+      <div class="row gap-4 mb-3">
+        <div class="col-5">
+          {{ form.first_name.label_tag }}
+          {{ form.first_name }}
+        </div>
+        <div class="col-5">
+          {{ form.last_name.label_tag }}
+          {{ form.last_name }}
+        </div>
+      </div>
+      <p>
+        <label>Bạn tới đây với vai trò là:</label>
+        <select name="vai_tro" id="role" class="form-select">
+          <option>Khách thuê</option>
+          <option>Khách sạn</option>
+        </select>
+      </p>
+      <div id="profile-form" class="d-none">
+        {{ profile_form.as_p }}
+      </div>
+      <p>
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+      </p>
+      <p>
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+      </p>
+      <center>
+        <button class="btn bg-button">Đăng ký</button>
+      </center>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/register.js' %}"></script>
+{% endblock %}

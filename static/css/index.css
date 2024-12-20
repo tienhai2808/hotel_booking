@@ -1,0 +1,47 @@
+.a-header {
+  text-decoration: none;
+  color: white;
+}
+.text-center {
+  text-align: center;
+}
+.w-full {
+  width: 100%;
+}
+.a-none {
+  text-decoration: none;
+}
+.logo {
+  height: 40px;
+}
+.form-search input {
+  border: none;
+  border-bottom: 1.5px solid white;
+  color: white;
+}
+.form-search button {
+  border: none;
+  color: white;
+}
+.form-search input:focus {
+  border: none;
+  outline: none;
+  border-bottom: 1.5px solid white;
+  color: white;
+}
+.bg-main {
+  background-color: #6fc7e1 !important;
+}
+.bg-body {
+  background-color: #faf2e8 !important;
+}
+.bg-hotel {
+  background-color: #fde3c8 !important;
+}
+
+.bg-button {
+  background-color: #ffa883 !important;
+}
+.font-mulish {
+  font-family: 'Mulish', sans-serif !important;
+}

@@ -1,0 +1,51 @@
+<div class="div-form d-none">
+  <div class="div-close">
+    <i btn-x class="fa-regular fa-circle-xmark"></i>
+  </div>
+  <form method="POST" class="order-form bg-main">
+    <h4 class="text-center text-light">{{ room.ten }}</h4>
+    {% csrf_token %}
+    <div class="row justify-content-between">
+      <div class="col-5">
+        {{ form.ngay_nhan.label_tag }}
+        {{ form.ngay_nhan }}
+      </div>
+      <div class="col-5">
+        {{ form.ngay_tra.label_tag }}
+        {{ form.ngay_tra }}
+      </div>
+    </div>
+    <div class="text-center text-light mt-3">Khách sẽ nhận và trả phòng vào 12 giờ trưa</div>
+    <div>
+      {{ form.so_khach.label_tag }}
+      {{ form.so_khach }}
+    </div>
+    <div>
+      {{ form.yeu_cau.label_tag }}
+      {{ form.yeu_cau }}
+    </div>
+    <div>
+      {{ form.phuong_thuc.label_tag }}
+      {{ form.phuong_thuc }}
+    </div>
+    <div class="tt-nh d-none">
+      <div>
+        {{ form.so_tai_khoan.label_tag }}
+        {{ form.so_tai_khoan }}
+      </div>
+      <div>
+        {{ form.ngan_hang.label_tag }}
+        {{ form.ngan_hang }}
+      </div>
+    </div>
+    <input hidden type="text" name="tong_tien">
+    <div class="tong-tien">
+      <strong>Tổng thanh toán: </strong>
+      <strong><i class="so-tien">0</i></strong></span> 
+      <strong><i>VND</i></strong>
+    </div>
+    <center>
+      <button class="btn bg-button my-3">Xác nhận đặt phòng</button>
+    </center>
+  </form>
+</div>

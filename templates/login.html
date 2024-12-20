@@ -1,0 +1,24 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  Đăng nhập
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Đăng nhập</h1>
+<div class="d-flex justify-content-center pb-5">
+  <div style="width: 50%;" class="border bg-hotel border-2 rounded d-flex justify-content-center py-4">
+    <form style="width: 90%;" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="row mb-3">
+        <div class="col-4"><a href="/password-reset/">Quên mật khẩu</a></div>
+        <div class="text-center col-4">Đăng ký <a href="/register/">tại đây</a></div> 
+      </div>
+      <center>
+        <button class="btn bg-button">Đăng nhập</button>
+      </center>
+    </form>
+  </div>
+</div>
+{% endblock %}

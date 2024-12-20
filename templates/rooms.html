@@ -1,0 +1,69 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  Quản lý phòng
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pt-2">Quản lý phòng</h1>
+<div class="d-flex justify-content-center pb-2">
+  <table class="table table-bordered border-primary" style="width: 80%;">
+    <thead>
+      <tr>
+        <th scope="col">Tên phòng</th>
+        <th scope="col">Sức chứa</th>
+        <th scope="col">Giá</th>
+        <th scope="col">Đơn hàng</th>
+        <th scope="col">Đánh giá</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Chi tiết</th>
+        <th scope="col">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for phong in phongs %}
+      <tr>
+        <td>
+          <a href="/hotel/{{ phong.khach_san.slug }}/{{ phong.slug }}/" title="{{ phong.ten }}" class="a-none">{{ phong.ten|truncatechars:30 }}</a>
+        </td>
+        <td>{{ phong.suc_chua }}</td>
+        <td>{{ phong.gia }}VND</td>
+        <td>{{ phong.datphongs.count }}</td>
+        <td>{{ phong.danhgias.count }}</td>
+        <td>
+        {% if phong.trang_thai %}
+          Đang hoạt động
+        {% else %}
+          Ngưng hoạt động
+        {% endif %}
+        </td>
+        <td>
+          <a href="/my/edit/hotel/{{ phong.slug }}/" class="a-none">Xem chi tiết</a>
+        </td>
+        <td>
+        {% if phong.trang_thai %}
+          <span id="{{ phong.id }}" class="btn-stop badge text-bg-warning" style="cursor: pointer;">Ngừng</span>
+        {% else %}
+          <span id="{{ phong.id }}" class="btn-active badge text-bg-primary" style="cursor: pointer;">Hoạt động</span>
+        {% endif %}
+          <span id="{{ phong.id }}" class="btn-delete badge text-bg-danger" style="cursor: pointer;">Xóa</span>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<form form-action method="post">
+  {% csrf_token %}
+  <input hidden type="text" class="id-hidden" name="room_id">
+  <input hidden type="text" class="action-hidden" name="action">
+</form>
+<center>
+  <a href="/my/hotel/create-room/" class="btn bg-button">Tạo phòng mới</a>
+</center>
+{% endblock %}
+
+{% block js %}
+{% load static %}
+<script src="{% static 'js/rooms.js' %}"></script>
+{% endblock %}
